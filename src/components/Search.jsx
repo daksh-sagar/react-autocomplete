@@ -23,12 +23,13 @@ const SearchComponent = () => {
     'Leeds',
   ])
 
+  // handle search input change
   const handleInput = (e) => {
     const value = e.target.value
     setState((state) => ({ ...state, searchTerm: value }))
   }
 
-  const handleChange = (val) => {
+  const handleClick = (val) => {
     setState({
       ...state,
       searchTerm: val,
@@ -42,6 +43,7 @@ const SearchComponent = () => {
         show: 'loading',
       }))
 
+      // If length of search term < 3 update the flag to show appropriate tip to the user
       if (state.searchTerm.trim().length < 3) {
         setShowTip(true)
       } else {
@@ -51,7 +53,7 @@ const SearchComponent = () => {
             ...state,
             requestCount: state.requestCount + 1,
           }))
-        }, 1000)
+        }, 1000) // Update count 1 second after the user has stopped typing in the search box, to prevent unnecessary api calls.
 
         return () => clearTimeout(delay)
       }
@@ -67,6 +69,7 @@ const SearchComponent = () => {
     if (state.requestCount) {
       const request = axios.CancelToken.source()
 
+      // fetchResults fetches the search results from the api and populates app state
       async function fetchResults() {
         try {
           const response = await axios.get(
@@ -87,6 +90,7 @@ const SearchComponent = () => {
             show: 'results',
           }))
 
+          // Update recentSearches array with the most recent search query
           setRecentSearches((recentSearches) => {
             const searches = [...recentSearches]
             searches.pop()
@@ -121,7 +125,7 @@ const SearchComponent = () => {
         {state.show === 'neither' ? (
           <Suggestions
             recentSearches={recentSearches}
-            handleChange={handleChange}
+            handleClick={handleClick}
           />
         ) : state.show === 'loading' ? (
           <Loading

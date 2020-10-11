@@ -3,9 +3,10 @@ import React from 'react'
 
 const gridStyle = {
   textAlign: 'center',
+  cursor: 'pointer',
 }
 
-const Suggestions = ({ recentSearches, handleChange }) => {
+const Suggestions = ({ recentSearches, handleClick }) => {
   return (
     <>
       <Divider />
@@ -15,18 +16,10 @@ const Suggestions = ({ recentSearches, handleChange }) => {
         bordered={false}
       >
         {recentSearches.map((val, i) => (
-          <Card.Grid
-            onClick={() => handleChange(val)}
-            key={i}
-            style={gridStyle}
-          >
+          <Card.Grid onClick={() => handleClick(val)} key={i} style={gridStyle}>
             {val}
           </Card.Grid>
         ))}
-
-        {/* <Card.Grid style={gridStyle}>Berlin</Card.Grid>
-        <Card.Grid style={gridStyle}>Tokyo</Card.Grid>
-        <Card.Grid style={gridStyle}>Bangalore</Card.Grid> */}
       </Card>{' '}
       <Divider />
       <Card
@@ -34,31 +27,31 @@ const Suggestions = ({ recentSearches, handleChange }) => {
         title='Popular Cities'
         bordered={false}
       >
-        <Card.Grid onClick={() => handleChange('London')} style={gridStyle}>
+        <Card.Grid onClick={() => handleClick('London')} style={gridStyle}>
           London
         </Card.Grid>
-        <Card.Grid onClick={() => handleChange('Berlin')} style={gridStyle}>
+        <Card.Grid onClick={() => handleClick('Berlin')} style={gridStyle}>
           Berlin
         </Card.Grid>
-        <Card.Grid onClick={() => handleChange('Tokyo')} style={gridStyle}>
+        <Card.Grid onClick={() => handleClick('Tokyo')} style={gridStyle}>
           Tokyo
         </Card.Grid>
-        <Card.Grid onClick={() => handleChange('Nottingham')} style={gridStyle}>
+        <Card.Grid onClick={() => handleClick('Nottingham')} style={gridStyle}>
           Nottingham
         </Card.Grid>
-        <Card.Grid onClick={() => handleChange('Manchester')} style={gridStyle}>
+        <Card.Grid onClick={() => handleClick('Manchester')} style={gridStyle}>
           Manchester
         </Card.Grid>
-        <Card.Grid onClick={() => handleChange('Leeds')} style={gridStyle}>
+        <Card.Grid onClick={() => handleClick('Leeds')} style={gridStyle}>
           Leeds
         </Card.Grid>
-        <Card.Grid onClick={() => handleChange('Liverpool')} style={gridStyle}>
+        <Card.Grid onClick={() => handleClick('Liverpool')} style={gridStyle}>
           Liverpool
         </Card.Grid>
-        <Card.Grid onClick={() => handleChange('Sheffield')} style={gridStyle}>
+        <Card.Grid onClick={() => handleClick('Sheffield')} style={gridStyle}>
           Sheffield
         </Card.Grid>
-        <Card.Grid onClick={() => handleChange('Bangalore')} style={gridStyle}>
+        <Card.Grid onClick={() => handleClick('Bangalore')} style={gridStyle}>
           Bangalore
         </Card.Grid>
       </Card>
