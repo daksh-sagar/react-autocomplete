@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Input, List, Avatar, Typography } from 'antd'
 import axios from 'axios'
 import Loading from './Loading'
+import Suggestions from './Suggestions'
 
 const { Search } = Input
 const { Text } = Typography
@@ -81,6 +82,7 @@ const SearchComponent = () => {
 
       return () => request.cancel()
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.requestCount])
 
   return (
@@ -88,12 +90,12 @@ const SearchComponent = () => {
       <Search
         placeholder='Search by College or City'
         onChange={handleInput}
-        enterButton
+        enterButton='Search'
         size='large'
       />
       <div>
         {state.show === 'neither' ? (
-          <div>SHOW ALL SORTS OF RUBBISH</div>
+          <Suggestions />
         ) : state.show === 'loading' ? (
           <Loading
             showTip={showTip}

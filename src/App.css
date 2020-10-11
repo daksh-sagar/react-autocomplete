@@ -22,3 +22,7 @@
 .ant-btn.ant-btn-primary.ant-btn-lg.ant-input-search-button {
   background-color: #e8415d;
 }
+
+.ant-card-contain-grid:not(.ant-card-loading) .ant-card-body {
+  padding: 24px;
+}

@@ -15,7 +15,7 @@ const Loading = ({ showTip, searchTermLength }) => {
         showTip && (
           <div>
             Please type {3 - searchTermLength} more{' '}
-            {searchTermLength === 2 ? 'letter' : 'letters'} to get sugegstions{' '}
+            {searchTermLength === 2 ? 'letter' : 'letters'} to get suggestions{' '}
           </div>
         )
       }
