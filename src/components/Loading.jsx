@@ -6,12 +6,19 @@ const listData = [
   { name: 'name one', secondary_name: 'something something' },
   { name: 'name one', secondary_name: 'something something' },
   { name: 'name one', secondary_name: 'something something' },
-  { name: 'name one', secondary_name: 'something something' },
 ]
 
-const Loading = () => {
+const Loading = ({ showTip, searchTermLength }) => {
   return (
     <List
+      header={
+        showTip && (
+          <div>
+            Please type {3 - searchTermLength} more{' '}
+            {searchTermLength === 2 ? 'letter' : 'letters'} to get sugegstions{' '}
+          </div>
+        )
+      }
       dataSource={listData}
       bordered
       size='small'

@@ -14,6 +14,8 @@ const SearchComponent = () => {
     requestCount: 0,
   })
 
+  const [showTip, setShowTip] = useState(true)
+
   const handleInput = (e) => {
     const value = e.target.value
     setState((state) => ({ ...state, searchTerm: value }))
@@ -26,14 +28,19 @@ const SearchComponent = () => {
         show: 'loading',
       }))
 
-      const delay = setTimeout(() => {
-        setState((state) => ({
-          ...state,
-          requestCount: state.requestCount + 1,
-        }))
-      }, 1000)
+      if (state.searchTerm.trim().length < 3) {
+        setShowTip(true)
+      } else {
+        setShowTip(false)
+        const delay = setTimeout(() => {
+          setState((state) => ({
+            ...state,
+            requestCount: state.requestCount + 1,
+          }))
+        }, 1000)
 
-      return () => clearTimeout(delay)
+        return () => clearTimeout(delay)
+      }
     } else {
       setState((state) => ({
         ...state,
@@ -88,7 +95,10 @@ const SearchComponent = () => {
         {state.show === 'neither' ? (
           <div>SHOW ALL SORTS OF RUBBISH</div>
         ) : state.show === 'loading' ? (
-          <Loading />
+          <Loading
+            showTip={showTip}
+            searchTermLength={state.searchTerm.trim().length}
+          />
         ) : (
           <>
             <List
