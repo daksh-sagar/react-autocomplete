@@ -1,0 +1,24 @@
+@import '~antd/dist/antd.css';
+
+.search-container {
+  max-width: 750px;
+  margin: 20px auto;
+}
+
+.search {
+  padding: 20px;
+}
+
+.ant-input:focus {
+  outline: none;
+  box-shadow: none;
+  border-color: black;
+}
+/* 
+#root > div > div > span > span > span > button {
+  
+} */
+
+.ant-btn.ant-btn-primary.ant-btn-lg.ant-input-search-button {
+  background-color: #e8415d;
+}

@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from 'react'
+import { Input, List, Avatar, Typography } from 'antd'
 import axios from 'axios'
+import Loading from './Loading'
 
-const Search = () => {
+const { Search } = Input
+const { Text } = Typography
+
+const SearchComponent = () => {
   const [state, setState] = useState({
     searchTerm: '',
     results: [],
@@ -72,52 +77,44 @@ const Search = () => {
   }, [state.requestCount])
 
   return (
-    <div className='search-overlay'>
-      <div className='search-overlay-top shadow-sm'>
-        <div className='container container--narrow'>
-          <label htmlFor='live-search-field' className='search-overlay-icon'>
-            <i className='fas fa-search'></i>
-          </label>
-          <input
-            autoFocus
-            type='text'
-            autoComplete='off'
-            id='live-search-field'
-            className='live-search-field'
-            placeholder='What are you interested in?'
-            onChange={handleInput}
-          />
-        </div>
-      </div>
-
-      <div className='search-overlay-bottom'>
-        <div className='container container--narrow py-3'>
-          <div className='list-group shadow-sm'>
-            {state.show === 'neither' ? (
-              <div>SHOW ALL SORTS OF RUBBISH</div>
-            ) : state.show === 'loading' ? (
-              <div>Loading Results...</div>
-            ) : (
-              <>
-                <div className='list-group-item active'>
-                  <strong>Search Results</strong> {state.results.length} items
-                  found
-                </div>
-                <ul>
-                  {state.results.map((place) => (
-                    <li key={place.id}>
-                      {place.name}
-                      {place.region_type}
-                    </li>
-                  ))}
-                </ul>
-              </>
-            )}
-          </div>
-        </div>
+    <div className='search'>
+      <Search
+        placeholder='Search by College or City'
+        onChange={handleInput}
+        enterButton
+        size='large'
+      />
+      <div>
+        {state.show === 'neither' ? (
+          <div>SHOW ALL SORTS OF RUBBISH</div>
+        ) : state.show === 'loading' ? (
+          <Loading />
+        ) : (
+          <>
+            <List
+              bordered
+              dataSource={state.results}
+              size='default'
+              renderItem={(place) => (
+                <List.Item key={place.id}>
+                  <List.Item.Meta
+                    avatar={
+                      <Avatar
+                        src='https://icons-for-free.com/iconfiles/png/512/marker+navigation+place+icon-1320196453703105111.png'
+                        size='small'
+                      />
+                    }
+                    title={<Text type='danger'>{place.name}</Text>}
+                    description={place.secondary_name}
+                  />
+                </List.Item>
+              )}
+            />
+          </>
+        )}
       </div>
     </div>
   )
 }
 
-export default Search
+export default SearchComponent

@@ -1,10 +1,10 @@
 import React from 'react'
-import './App.css'
 import Search from './components/Search'
+import './App.css'
 
 function App() {
   return (
-    <div className='App'>
+    <div className='search-container'>
       <Search />
     </div>
   )
