@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Input, List, Avatar, Typography } from 'antd'
+import { CloseCircleOutlined } from '@ant-design/icons'
 import axios from 'axios'
 import Loading from './Loading'
 import Suggestions from './Suggestions'
@@ -119,6 +120,15 @@ const SearchComponent = () => {
         placeholder='Search by College or City'
         onChange={handleInput}
         enterButton='Search'
+        suffix={
+          <CloseCircleOutlined
+            onClick={() => handleClick('')}
+            style={{
+              fontSize: 16,
+              color: '#e8415d',
+            }}
+          />
+        }
         size='large'
       />
       <div>
