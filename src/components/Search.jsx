@@ -28,6 +28,13 @@ const SearchComponent = () => {
     setState((state) => ({ ...state, searchTerm: value }))
   }
 
+  const handleChange = (val) => {
+    setState({
+      ...state,
+      searchTerm: val,
+    })
+  }
+
   useEffect(() => {
     if (state.searchTerm.trim()) {
       setState((state) => ({
@@ -104,6 +111,7 @@ const SearchComponent = () => {
     <div className='search'>
       <Search
         autoFocus
+        value={state.searchTerm}
         placeholder='Search by College or City'
         onChange={handleInput}
         enterButton='Search'
@@ -111,7 +119,10 @@ const SearchComponent = () => {
       />
       <div>
         {state.show === 'neither' ? (
-          <Suggestions recentSearches={recentSearches} />
+          <Suggestions
+            recentSearches={recentSearches}
+            handleChange={handleChange}
+          />
         ) : state.show === 'loading' ? (
           <Loading
             showTip={showTip}
