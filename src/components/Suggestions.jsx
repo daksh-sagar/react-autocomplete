@@ -3,10 +3,9 @@ import React from 'react'
 
 const gridStyle = {
   textAlign: 'center',
-  //   marginBottom: '3%',
 }
 
-const Suggestions = () => {
+const Suggestions = ({ recentSearches }) => {
   return (
     <>
       <Divider />
@@ -15,10 +14,15 @@ const Suggestions = () => {
         title='Recent Searches'
         bordered={false}
       >
-        <Card.Grid style={gridStyle}>London</Card.Grid>
-        <Card.Grid style={gridStyle}>Berlin</Card.Grid>
+        {recentSearches.map((val, i) => (
+          <Card.Grid key={i} style={gridStyle}>
+            {val}
+          </Card.Grid>
+        ))}
+
+        {/* <Card.Grid style={gridStyle}>Berlin</Card.Grid>
         <Card.Grid style={gridStyle}>Tokyo</Card.Grid>
-        <Card.Grid style={gridStyle}>Bangalore</Card.Grid>
+        <Card.Grid style={gridStyle}>Bangalore</Card.Grid> */}
       </Card>{' '}
       <Divider />
       <Card
@@ -26,15 +30,15 @@ const Suggestions = () => {
         title='Popular Cities'
         bordered={false}
       >
-        <Card.Grid>London</Card.Grid>
-        <Card.Grid>Berlin</Card.Grid>
-        <Card.Grid>Tokyo</Card.Grid>
-        <Card.Grid>Nottingham</Card.Grid>
-        <Card.Grid>Manchester</Card.Grid>
-        <Card.Grid>Leeds</Card.Grid>
-        <Card.Grid>Liverpool</Card.Grid>
-        <Card.Grid>Sheffield</Card.Grid>
-        <Card.Grid>Bangalore</Card.Grid>
+        <Card.Grid style={gridStyle}>London</Card.Grid>
+        <Card.Grid style={gridStyle}>Berlin</Card.Grid>
+        <Card.Grid style={gridStyle}>Tokyo</Card.Grid>
+        <Card.Grid style={gridStyle}>Nottingham</Card.Grid>
+        <Card.Grid style={gridStyle}>Manchester</Card.Grid>
+        <Card.Grid style={gridStyle}>Leeds</Card.Grid>
+        <Card.Grid style={gridStyle}>Liverpool</Card.Grid>
+        <Card.Grid style={gridStyle}>Sheffield</Card.Grid>
+        <Card.Grid style={gridStyle}>Bangalore</Card.Grid>
       </Card>
     </>
   )

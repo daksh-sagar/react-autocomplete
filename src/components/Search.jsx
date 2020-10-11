@@ -16,6 +16,12 @@ const SearchComponent = () => {
   })
 
   const [showTip, setShowTip] = useState(true)
+  const [recentSearches, setRecentSearches] = useState([
+    'London',
+    'Liverpool',
+    'Bangalore',
+    'Leeds',
+  ])
 
   const handleInput = (e) => {
     const value = e.target.value
@@ -64,7 +70,7 @@ const SearchComponent = () => {
                 sort_order: 'desc',
                 states: 'active',
                 limit: 5,
-                search_name: state.searchTerm,
+                search_name: state.searchTerm.trim(),
               },
             }
           )
@@ -73,6 +79,15 @@ const SearchComponent = () => {
             results: response.data.data.result,
             show: 'results',
           }))
+
+          setRecentSearches((recentSearches) => {
+            const searches = [...recentSearches]
+            searches.pop()
+
+            const s = state.searchTerm.trim()
+            searches.unshift(s.charAt(0).toUpperCase() + s.slice(1))
+            return searches
+          })
         } catch (error) {
           console.log(JSON.stringify(error))
         }
@@ -88,6 +103,7 @@ const SearchComponent = () => {
   return (
     <div className='search'>
       <Search
+        autoFocus
         placeholder='Search by College or City'
         onChange={handleInput}
         enterButton='Search'
@@ -95,7 +111,7 @@ const SearchComponent = () => {
       />
       <div>
         {state.show === 'neither' ? (
-          <Suggestions />
+          <Suggestions recentSearches={recentSearches} />
         ) : state.show === 'loading' ? (
           <Loading
             showTip={showTip}
